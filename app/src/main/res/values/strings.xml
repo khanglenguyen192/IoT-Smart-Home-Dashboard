@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SmartHomeDashboard</string>
+
+    <string name="action_home">Home</string>
+    <string name="action_chart">Chart</string>
+    <string name="action_setting">Setting</string>
+
+    <string name="fragment_living_room">LIVING ROOM</string>
+    <string name="fragment_bed_room">BED ROOM</string>
+    <string name="fragment_dining_room">DINING ROOM</string>
+</resources>
