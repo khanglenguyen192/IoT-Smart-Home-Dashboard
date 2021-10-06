@@ -7,11 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.smarthomedashboard.R;
 
 public class BedRoomFragment extends Fragment {
-
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,4 +25,5 @@ public class BedRoomFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_bed_room, container, false);
         return view;
     }
+
 }
