@@ -50,7 +50,7 @@ public class LivingRoomFragment extends Fragment {
         living_room_light.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context.getContext(), "Light", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context.getContext(), "abcxyz", Toast.LENGTH_SHORT).show();
             }
         });
     }
