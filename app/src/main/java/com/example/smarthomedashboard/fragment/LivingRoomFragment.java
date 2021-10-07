@@ -1,5 +1,6 @@
 package com.example.smarthomedashboard.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.smarthomedashboard.MainActivity;
 import com.example.smarthomedashboard.R;
 
 public class LivingRoomFragment extends Fragment {
@@ -40,8 +42,9 @@ public class LivingRoomFragment extends Fragment {
         // Match view
         living_room_light = view.findViewById(R.id.living_room_light);
 
+
         //Call
-        setUpLivingRoomLightButton(view);
+        //setUpLivingRoomLightButton(view);
 
         return view;
     }
@@ -50,7 +53,7 @@ public class LivingRoomFragment extends Fragment {
         living_room_light.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context.getContext(), "abcxyz", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
