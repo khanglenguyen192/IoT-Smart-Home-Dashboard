@@ -1,4 +1,4 @@
-package com.example.smarthomedashboard.fragment;
+package com.example.smarthomedashboard.Fragment;
 
 import android.os.Bundle;
 

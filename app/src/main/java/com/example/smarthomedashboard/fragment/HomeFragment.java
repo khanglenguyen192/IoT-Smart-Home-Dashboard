@@ -1,4 +1,4 @@
-package com.example.smarthomedashboard.fragment;
+package com.example.smarthomedashboard.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.smarthomedashboard.R;
-import com.example.smarthomedashboard.adapter.HomeViewPagerAdapter;
+import com.example.smarthomedashboard.Adapter.HomeViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class HomeFragment extends Fragment {

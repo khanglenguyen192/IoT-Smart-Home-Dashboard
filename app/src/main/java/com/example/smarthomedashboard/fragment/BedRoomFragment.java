@@ -1,4 +1,4 @@
-package com.example.smarthomedashboard.fragment;
+package com.example.smarthomedashboard.Fragment;
 
 import android.os.Bundle;
 
@@ -7,12 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.example.smarthomedashboard.R;
 
 public class BedRoomFragment extends Fragment {
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

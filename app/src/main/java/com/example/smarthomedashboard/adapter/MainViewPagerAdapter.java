@@ -1,16 +1,13 @@
-package com.example.smarthomedashboard.adapter;
+package com.example.smarthomedashboard.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.lifecycle.Lifecycle;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.smarthomedashboard.fragment.ChartFragment;
-import com.example.smarthomedashboard.fragment.HomeFragment;
-import com.example.smarthomedashboard.fragment.SettingFragment;
+import com.example.smarthomedashboard.Fragment.ChartFragment;
+import com.example.smarthomedashboard.Fragment.HomeFragment;
+import com.example.smarthomedashboard.Fragment.SettingFragment;
 
 public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
 

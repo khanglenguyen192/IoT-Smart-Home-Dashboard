@@ -1,4 +1,4 @@
-package com.example.smarthomedashboard.mqtt;
+package com.example.smarthomedashboard.MQTT;
 
 import android.content.Context;
 import android.util.Log;

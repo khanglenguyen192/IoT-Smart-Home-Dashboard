@@ -1,4 +1,4 @@
-package com.example.smarthomedashboard.adapter;
+package com.example.smarthomedashboard.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -6,12 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.smarthomedashboard.fragment.BedRoomFragment;
-import com.example.smarthomedashboard.fragment.ChartFragment;
-import com.example.smarthomedashboard.fragment.DiningRoomFragment;
-import com.example.smarthomedashboard.fragment.HomeFragment;
-import com.example.smarthomedashboard.fragment.LivingRoomFragment;
-import com.example.smarthomedashboard.fragment.SettingFragment;
+import com.example.smarthomedashboard.Fragment.BedRoomFragment;
+import com.example.smarthomedashboard.Fragment.DiningRoomFragment;
+import com.example.smarthomedashboard.Fragment.LivingRoomFragment;
 
 public class HomeViewPagerAdapter extends FragmentStatePagerAdapter {
     public HomeViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {

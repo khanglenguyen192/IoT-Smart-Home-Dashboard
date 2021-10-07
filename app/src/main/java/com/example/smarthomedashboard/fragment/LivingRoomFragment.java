@@ -1,4 +1,4 @@
-package com.example.smarthomedashboard.fragment;
+package com.example.smarthomedashboard.Fragment;
 
 import android.os.Bundle;
 
@@ -38,7 +38,7 @@ public class LivingRoomFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_living_room, container, false);
 
         // Match view
-        living_room_light = view.findViewById(R.id.bedroom_light);
+        living_room_light = view.findViewById(R.id.living_room_light);
 
         //Call
         setUpLivingRoomLightButton(view);
