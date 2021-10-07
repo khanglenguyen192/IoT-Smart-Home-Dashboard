@@ -68,9 +68,10 @@
         app:cardBackgroundColor="@color/baseGrayColor"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/living_room_light3"
+        app:layout_constraintEnd_toEndOf="@+id/living_room_light2"
+        app:layout_constraintStart_toStartOf="@+id/living_room_light2"
         app:layout_constraintTop_toTopOf="@+id/living_room_light3"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="244dp">
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="84dp"
