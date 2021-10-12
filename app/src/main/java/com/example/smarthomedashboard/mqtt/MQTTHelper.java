@@ -1,4 +1,4 @@
-package com.example.smarthomedashboard.MQTT;
+package com.example.smarthomedashboard.mqtt;
 
 import android.content.Context;
 import android.util.Log;
@@ -18,11 +18,11 @@ public class MQTTHelper {
 
     final String serverUri = "tcp://io.adafruit.com:1883";
 
-    private String clientId = "your_id";
+    private String clientId = "";
 
-    final String subscriptionTopic = "your_topic";
-    final String username = "your_username";
-    final String password = "your_pass";
+    final String subscriptionTopic = "bksmartiot/feeds/+";
+    final String username = "bksmartiot";
+    final String password = "aio_vsnh58zLsDHGXGbWJTXBhVNKIiAh";
 
 //    private String clientId = "1913695";
 //    final String subscriptionTopic = "khangle19022001/f/+";
@@ -48,7 +48,7 @@ public class MQTTHelper {
 
             @Override
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-                Log.w("Mqtt", mqttMessage.toString());
+//                Log.w("Mqtt", mqttMessage.toString());
             }
 
             @Override

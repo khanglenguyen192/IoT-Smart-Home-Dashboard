@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.smarthomedashboard.Fragment.BedRoomFragment;
-import com.example.smarthomedashboard.Fragment.DiningRoomFragment;
+import com.example.smarthomedashboard.fragment.BedRoomFragment;
+import com.example.smarthomedashboard.fragment.DiningRoomFragment;
 import com.example.smarthomedashboard.fragment.LivingRoomFragment;
 
 public class HomeViewPagerAdapter extends FragmentStatePagerAdapter {

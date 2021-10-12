@@ -9,15 +9,34 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 
 import com.example.smarthomedashboard.adapter.MainViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.smarthomedashboard.mqtt.MQTTHelper;
+
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
+import org.json.JSONObject;
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
     // Declare
     private BottomNavigationView main_bottom_navigation;
     private ViewPager main_view_pager;
+    ProgressBar temperature;
+    ProgressBar humidity;
+    ProgressBar amountOfGas;
+    MQTTHelper mqttHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setUpBottomNavigation();
         setUpViewPager();
 
+        sendMQTT();
     }
 
     private void setUpBottomNavigation() {
@@ -84,5 +104,60 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void sendMQTT() {
+        mqttHelper = new MQTTHelper(getApplicationContext(), "123");
+        mqttHelper.setCallback(new MqttCallbackExtended() {
+            @Override
+            public void connectComplete(boolean reconnect, String serverURI) {
+                Log.d("Mqtt", "Connect successfully");
+            }
+
+            @Override
+            public void connectionLost(Throwable cause) {
+
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                Log.d("msg", "messageArrived: " + message.toString());
+                JSONObject jsonObject = new JSONObject(message.toString());
+                if (topic.contains("homeinfo")) {
+                    int temp = jsonObject.getInt("temp");
+                    int humid = jsonObject.getInt("humidity");
+                    int gas = jsonObject.getInt("gas");
+
+                    temperature = findViewById(R.id.tempProgressBar);
+                    humidity = findViewById(R.id.humidProgressBar);
+                    amountOfGas = findViewById(R.id.gasProgressBar);
+
+                    temperature.setProgress(temp);
+                    humidity.setProgress(humid);
+                    amountOfGas.setProgress(gas);
+                }
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+
+            }
+        });
+    }
+
+    public void sendDataMQTT(String data, String topic) {
+        MqttMessage message = new MqttMessage();
+        message.setId(123);
+        message.setQos(0);
+        message.setRetained(true);
+        byte[] bytes = data.getBytes(StandardCharsets.UTF_8);
+        message.setPayload(bytes);
+        Log.d("ABC","Publish:"+ message);
+        try {
+            mqttHelper.mqttAndroidClient.publish(topic,message);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
