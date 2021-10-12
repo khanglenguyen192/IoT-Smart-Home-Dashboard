@@ -3,19 +3,25 @@ package com.example.smarthomedashboard.fragment;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.smarthomedashboard.Fragment.LivingRoom.LivingRoomLightFragment;
+import com.example.smarthomedashboard.fragment.LivingRoom.LivingRoomLightFragment;
 import com.example.smarthomedashboard.MainActivity;
 import com.example.smarthomedashboard.R;
-import com.example.smarthomedashboard.fragment.LivingRoom.LivingRoomAirConditionterFragment;
+import com.example.smarthomedashboard.fragment.LivingRoom.LivingRoomAirConditionerFragment;
 
 public class LivingRoomFragment extends Fragment {
 
@@ -30,7 +36,10 @@ public class LivingRoomFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
     }
+
 
     @Override
     public void onResume() {
@@ -52,6 +61,8 @@ public class LivingRoomFragment extends Fragment {
         //Call
         setUpLivingRoomLightButton(view);
         setUpLivingRoomAirConditionerButton(view);
+
+
         return view;
     }
 
@@ -59,9 +70,15 @@ public class LivingRoomFragment extends Fragment {
         living_room_light.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getParentFragmentManager().beginTransaction().replace(R.id.living_room_setting_container, new LivingRoomLightFragment()).commit();
-                Toast.makeText(getActivity(), "This is my Toast message!", Toast.LENGTH_LONG).show();
+                LivingRoomLightFragment lightFragment = new LivingRoomLightFragment();
+//                getParentFragmentManager().beginTransaction().replace(R.id.living_room_setting_container, lightFragment).addToBackStack(null).commit();
+//                Toast.makeText(getActivity(), "This is my Toast message!", Toast.LENGTH_LONG).show();
                 Log.d("click", "onClick: 1");
+                FragmentManager fm = getParentFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.addToBackStack("lightFragment");
+                ft.replace(R.id.living_room_setting_container, lightFragment);
+                ft.commit();
             }
         });
     }
@@ -70,8 +87,18 @@ public class LivingRoomFragment extends Fragment {
         living_room_air_conditioner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getParentFragmentManager().beginTransaction().replace(R.id.living_room_setting_container, new LivingRoomAirConditionterFragment()).commit();
+                LivingRoomAirConditionerFragment airConditionerFragment = new LivingRoomAirConditionerFragment();
+//                getParentFragmentManager().beginTransaction().replace(R.id.living_room_setting_container, lightFragment).addToBackStack(null).commit();
+//                Toast.makeText(getActivity(), "This is my Toast message!", Toast.LENGTH_LONG).show();
+                Log.d("click", "onClick: 1");
+                FragmentManager fm = getParentFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.addToBackStack("airConditionerFragment");
+                ft.replace(R.id.living_room_setting_container, airConditionerFragment);
+                ft.commit();
             }
         });
     }
+
+
 }

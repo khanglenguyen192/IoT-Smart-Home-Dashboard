@@ -6,9 +6,11 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 
-import com.example.smarthomedashboard.Adapter.MainViewPagerAdapter;
+import com.example.smarthomedashboard.adapter.MainViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -82,4 +84,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }

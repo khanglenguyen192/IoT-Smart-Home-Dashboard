@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/body_shape"
     android:elevation="10dp"
-    tools:context=".Fragment.LivingRoom.LivingRoomAirConditionerFragment">
+    tools:context=".fragment.LivingRoom.LivingRoomAirConditionerFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/living_room_air_conditioner_1"

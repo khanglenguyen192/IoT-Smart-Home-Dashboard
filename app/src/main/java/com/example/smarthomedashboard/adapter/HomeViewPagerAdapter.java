@@ -1,4 +1,4 @@
-package com.example.smarthomedashboard.Adapter;
+package com.example.smarthomedashboard.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

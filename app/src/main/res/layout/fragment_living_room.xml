@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".Fragment.LivingRoomFragment">
+    android:id="@+id/living_room"
+    tools:context=".fragment.LivingRoomFragment">
 
     <RelativeLayout
         android:id="@+id/weatherForecast"

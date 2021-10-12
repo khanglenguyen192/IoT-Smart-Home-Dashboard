@@ -1,13 +1,15 @@
-package com.example.smarthomedashboard.Adapter;
+package com.example.smarthomedashboard.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+
 import com.example.smarthomedashboard.Fragment.ChartFragment;
 import com.example.smarthomedashboard.Fragment.HomeFragment;
 import com.example.smarthomedashboard.Fragment.SettingFragment;
+
 
 public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -29,6 +31,7 @@ public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
                 return new HomeFragment();
         }
     }
+
 
     @Override
     public int getCount() {
