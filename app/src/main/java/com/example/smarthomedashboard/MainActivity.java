@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_setting:
                         main_view_pager.setCurrentItem(2);
                         break;
+                    case R.id.action_camera:
+                        main_view_pager.setCurrentItem(3);
+                        break;
                 }
                 return true;
             }
