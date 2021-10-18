@@ -85,6 +85,12 @@ public class CameraFragment extends Fragment {
                 getActivity().setTitle(view.getTitle());
                 super.onPageFinished(view, url);
             }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                Toast.makeText(getActivity(), "Your Internet Connection may not be active Or " + error.getDescription(), Toast.LENGTH_LONG).show();
+                super.onReceivedError(view, request, error);
+            }
         });
 
         //cameraSetup();
@@ -134,8 +140,7 @@ public class CameraFragment extends Fragment {
                 && networkInfo.isAvailable()
                 && networkInfo.isConnected();
 
-        if ( !connected) {
-            Toast.makeText(getActivity(), "Failed to connect to Internet.", Toast.LENGTH_LONG).show();
+        if (!connected) {
             return false;
         }
         return true;
