@@ -1,33 +1,24 @@
 package com.example.smarthomedashboard.fragment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
-import com.example.smarthomedashboard.fragment.LivingRoom.LivingRoomLightFragment;
-import com.example.smarthomedashboard.MainActivity;
 import com.example.smarthomedashboard.R;
-import com.example.smarthomedashboard.fragment.LivingRoom.LivingRoomAirConditionerFragment;
 
 public class LivingRoomFragment extends Fragment {
 
     // Declare
-    CardView living_room_light;
-    CardView living_room_air_conditioner;
+    CardView living_room_light, living_room_air_conditioner;
+    ConstraintLayout roomSetting, lightSetting, airConditionerSetting;
+    ImageButton btn_light_back, btn_air_conditioner_back;
 
     public LivingRoomFragment() {
         // Required empty public constructor
@@ -56,11 +47,19 @@ public class LivingRoomFragment extends Fragment {
         living_room_light = view.findViewById(R.id.living_room_light);
         living_room_air_conditioner = view.findViewById(R.id.living_room_air_conditioner);
 
+        roomSetting = view.findViewById(R.id.living_room_setting_container);
+        lightSetting = view.findViewById(R.id.living_room_light_container);
+        airConditionerSetting = view.findViewById(R.id.living_room_air_conditioner_container);
+
+        btn_light_back = view.findViewById(R.id.living_room_btn_light_back);
+        btn_air_conditioner_back = view.findViewById(R.id.living_room_btn_air_conditioner_back);
 
 
         //Call
         setUpLivingRoomLightButton(view);
         setUpLivingRoomAirConditionerButton(view);
+        setUpBtnLightBack(view);
+        setUpBtnAirConditionerBack(view);
 
 
         return view;
@@ -70,15 +69,18 @@ public class LivingRoomFragment extends Fragment {
         living_room_light.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LivingRoomLightFragment lightFragment = new LivingRoomLightFragment();
-//                getParentFragmentManager().beginTransaction().replace(R.id.living_room_setting_container, lightFragment).addToBackStack(null).commit();
-//                Toast.makeText(getActivity(), "This is my Toast message!", Toast.LENGTH_LONG).show();
-                Log.d("click", "onClick: 1");
-                FragmentManager fm = getParentFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.addToBackStack("lightFragment");
-                ft.replace(R.id.living_room_setting_container, lightFragment);
-                ft.commit();
+                roomSetting.setVisibility(getView().INVISIBLE);
+                lightSetting.setVisibility(getView().VISIBLE);
+            }
+        });
+    }
+
+    private void setUpBtnLightBack(View context){
+        btn_light_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roomSetting.setVisibility(getView().VISIBLE);
+                lightSetting.setVisibility(getView().INVISIBLE);
             }
         });
     }
@@ -87,15 +89,18 @@ public class LivingRoomFragment extends Fragment {
         living_room_air_conditioner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LivingRoomAirConditionerFragment airConditionerFragment = new LivingRoomAirConditionerFragment();
-//                getParentFragmentManager().beginTransaction().replace(R.id.living_room_setting_container, lightFragment).addToBackStack(null).commit();
-//                Toast.makeText(getActivity(), "This is my Toast message!", Toast.LENGTH_LONG).show();
-                Log.d("click", "onClick: 1");
-                FragmentManager fm = getParentFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.addToBackStack("airConditionerFragment");
-                ft.replace(R.id.living_room_setting_container, airConditionerFragment);
-                ft.commit();
+                roomSetting.setVisibility(getView().INVISIBLE);
+                airConditionerSetting.setVisibility(getView().VISIBLE);
+            }
+        });
+    }
+
+    private void setUpBtnAirConditionerBack(View context){
+        btn_air_conditioner_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roomSetting.setVisibility(getView().VISIBLE);
+                airConditionerSetting.setVisibility(getView().INVISIBLE);
             }
         });
     }
