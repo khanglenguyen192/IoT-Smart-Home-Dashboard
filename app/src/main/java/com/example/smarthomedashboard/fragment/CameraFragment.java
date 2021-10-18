@@ -9,13 +9,18 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.smarthomedashboard.R;
+import com.example.smarthomedashboard.adapter.CameraViewPagerAdapter;
+import com.google.android.material.tabs.TabLayout;
 
 public class CameraFragment extends Fragment {
 
     // Declare
-    private WebView cam1;
+    private TabLayout cameraTabLayout;
+    private ViewPager cameraViewPager;
 
     public CameraFragment() {
         // Required empty public constructor
@@ -39,17 +44,20 @@ public class CameraFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_camera, container, false);
 
-        cam1 = view.findViewById(R.id.cam1);
+        // Get view
+        cameraTabLayout = view.findViewById(R.id.camera_tab_layout);
+        cameraViewPager = view.findViewById(R.id.camera_view_pager);
 
-        String userAgent = System.getProperty( "http.agent" );
-        Log.e("User agent",userAgent);
+        //Call
+        setUpCameraAdapter();
 
-        cam1.setWebViewClient(new WebViewClient());
-        cam1.getSettings().setUserAgentString(userAgent);
-        cam1.getSettings().setJavaScriptEnabled(true);
-        cam1.getSettings().setAppCacheEnabled(true);
-        cam1.getSettings().setDomStorageEnabled(true);
-        cam1.loadUrl("http://smarthomecamera.ddns.net:8081/");
+        cameraTabLayout.setupWithViewPager(cameraViewPager);
+
         return view;
+    }
+
+    private void setUpCameraAdapter(){
+        CameraViewPagerAdapter cameraViewPagerAdapter = new CameraViewPagerAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        cameraViewPager.setAdapter(cameraViewPagerAdapter);
     }
 }
