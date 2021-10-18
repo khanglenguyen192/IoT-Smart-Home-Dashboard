@@ -2,6 +2,8 @@ package com.example.smarthomedashboard.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.icu.text.CaseMap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -12,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -25,8 +29,10 @@ import com.example.smarthomedashboard.R;
 public class CameraFragment extends Fragment {
 
     // Declare
+    private String cam1Url = "https://www.google.com.vn/?hl=vi";
+
     private WebView cam1;
-    private ProgressDialog progressDialog;
+    private ProgressBar progressBar;
 
     private ImageButton captureButton;
     private ImageButton infoButton;
@@ -54,20 +60,43 @@ public class CameraFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_camera, container, false);
 
-        cam1 = view.findViewById(R.id.cam1);
-        refreshButton = view.findViewById(R.id.refreshButton);
+        cam1 = (WebView)view.findViewById(R.id.cam1);
+        progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
 
-        refreshButton.setOnClickListener(new View.OnClickListener() {
+        cam1.setWebViewClient(new WebViewClient());
+        cam1.loadUrl(cam1Url);
+        //enable JavaScript
+        WebSettings webSettings = cam1.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        cam1.setWebViewClient(new WebViewClient(){
+            //Method control page start + page finish functionality..
             @Override
-            public void onClick(View view) {
-                cam1.loadUrl("http://smarthomecamera.ddns.net:8081/");
-                connectionStatus();
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                //set progressBar when page loading is start...
+                progressBar.setVisibility(View.VISIBLE);
+                getActivity().setTitle("Loading");
+                super.onPageStarted(view, url, favicon);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                progressBar.setVisibility(View.GONE);
+                getActivity().setTitle(view.getTitle());
+                super.onPageFinished(view, url);
             }
         });
 
-        cameraSetup();
+        //cameraSetup();
 
-
+        refreshButton = view.findViewById(R.id.refreshButton);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cam1.loadUrl(cam1Url);
+                connectionStatus();
+            }
+        });
 
         return view;
     }
@@ -76,46 +105,13 @@ public class CameraFragment extends Fragment {
         String userAgent = System.getProperty( "http.agent" );
         Log.e("User agent",userAgent);
 
-        //cam1.setWebViewClient(new WebViewClient());
-        cam1.setWebViewClient(new WebViewClient() {
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-            public void onLoadResource(WebView view, String url) {
-                // Check to see if there is a progress dialog
-                if (progressDialog == null) {
-                    // If no progress dialog, make one and set message
-                    progressDialog = new ProgressDialog(getActivity());
-                    progressDialog.setMessage("Loading please wait...");
-                    progressDialog.show();
-
-                    // Hide the webview while loading
-                    cam1.setEnabled(false);
-                }
-            }
-            public void onPageFinished(WebView view, String url) {
-                // Page is done loading;
-                // hide the progress dialog and show the webview
-                if (progressDialog.isShowing()) {
-                    progressDialog.dismiss();
-                    progressDialog = null;
-                    cam1.setEnabled(true);
-                }
-            }
-
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                Toast.makeText(getActivity(), "Your Internet Connection May not be active Or " + error.getDescription(), Toast.LENGTH_LONG).show();
-            }
-        });
+        cam1.setWebViewClient(new WebViewClient());
 
         cam1.getSettings().setUserAgentString(userAgent);
         cam1.getSettings().setJavaScriptEnabled(true);
         cam1.getSettings().setAppCacheEnabled(true);
         cam1.getSettings().setDomStorageEnabled(true);
-        cam1.loadUrl("http://smarthomecamera.ddns.net:8081/");
+        cam1.loadUrl(cam1Url);
     }
 
     protected void connectionStatus() {
