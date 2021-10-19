@@ -1,9 +1,7 @@
 package com.example.smarthomedashboard.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.icu.text.CaseMap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -29,8 +27,7 @@ import com.example.smarthomedashboard.R;
 public class CameraFragment extends Fragment {
 
     // Declare
-    private String cam1Url = "https://www.google.com.vn/?hl=vi";
-
+    private final String cam1Url = "http://smarthomecamera.ddns.net:8081";
     private WebView cam1;
     private ProgressBar progressBar;
 
@@ -86,6 +83,7 @@ public class CameraFragment extends Fragment {
                 super.onPageFinished(view, url);
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 Toast.makeText(getActivity(), "Your Internet Connection may not be active Or " + error.getDescription(), Toast.LENGTH_LONG).show();
