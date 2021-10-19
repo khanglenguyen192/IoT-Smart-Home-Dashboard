@@ -27,10 +27,16 @@
         <entry key="..\:/android studio/SmartHomeDashboard/app/src/main/res/layout/fragment_setting.xml" value="0.36666666666666664" />
         <entry key="..\:/android studio/SmartHomeDashboard/app/src/main/res/layout/home.xml" value="0.35260416666666666" />
         <entry key="..\:/android studio/SmartHomeDashboard/app/src/main/res/menu/menu_bottom_nav.xml" value="0.36666666666666664" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/camera_icon_add.xml" value="0.1125" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/camera_icon_refresh.xml" value="0.1125" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_bed_room.xml" value="0.1" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera.xml" value="0.1" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera1.xml" value="0.18" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera_popup.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
