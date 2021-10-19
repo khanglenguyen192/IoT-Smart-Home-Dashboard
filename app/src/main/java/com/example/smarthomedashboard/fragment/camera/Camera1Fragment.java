@@ -2,18 +2,23 @@ package com.example.smarthomedashboard.fragment.camera;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,12 +43,20 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Camera1Fragment extends Fragment {
 
     // Declare
     private boolean camAvailable = true;
 
-    private final String camUrl = "http://smarthomecamera.ddns.net:8081";
+    private final String camUrl = "https://www.google.com.vn/?hl=vi";
+    //private final String camUrl = "http://smarthomecamera.ddns.net:8081";
     private String camName = "Cam 1";
     private String camInfo = "Out door";
 
@@ -103,6 +116,15 @@ public class Camera1Fragment extends Fragment {
             }
         });
 
+        captureButton = view.findViewById(R.id.captureButton);
+        captureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Bitmap bm = getBitmapFromView(cam);
+                startSave();
+            }
+        });
+
         infoButton = view.findViewById(R.id.infoButton);
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +154,52 @@ public class Camera1Fragment extends Fragment {
         return  view;
     }
 
+    public static Bitmap viewToBitMap(View view, int width, int height) {
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
+    }
+
+    public void startSave() {
+        FileOutputStream fileOutputStream = null;
+        File file=getDisc();
+
+        if (!file.exists() && !file.mkdirs()) {
+            Toast.makeText(getContext(), "Can't create directory to save Image", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyymmsshhmmss");
+        String date = simpleDateFormat.format(new Date());
+        String name = "Img" + date + ".jpg";
+        String file_name=file.getAbsolutePath()+"/"+name;
+        File new_file = new File (file_name);
+        try {
+            fileOutputStream = new FileOutputStream(new_file);
+            Bitmap bitmap = viewToBitMap(cam, cam.getWidth(), cam.getHeight());
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            Toast.makeText(getContext(), "Save image success", Toast.LENGTH_LONG).show();
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        refreshGallery(new_file);
+    }
+
+    public void refreshGallery(File file) {
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        intent.setData(Uri.fromFile(file));
+        //sendBroadcast(intent);
+    }
+
+    public File getDisc() {
+        File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        return new File(file, "Image Demo");
+    }
+
     protected void connectionStatus() {
         boolean check = checkConnection();
 
@@ -142,7 +210,6 @@ public class Camera1Fragment extends Fragment {
             Toast.makeText(getActivity(), "Failed to connect to internet.", Toast.LENGTH_LONG).show();
         }
     }
-
     protected boolean checkConnection(){
         ConnectivityManager conMan = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 

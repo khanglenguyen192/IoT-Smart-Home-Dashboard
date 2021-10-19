@@ -28,9 +28,9 @@
         android:id="@+id/cam1"
         android:layout_width="412dp"
         android:layout_height="563dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="44dp"
-        app:layout_constraintBottom_toTopOf="@+id/cameraButton"
+        app:layout_constraintBottom_toTopOf="@+id/captureButton"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/cameraButton"
+        android:id="@+id/captureButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -79,7 +79,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintStart_toEndOf="@+id/cameraButton"
+        app:layout_constraintStart_toEndOf="@+id/captureButton"
         app:srcCompat="@drawable/camera_icon_info" />
 
     <ImageButton
