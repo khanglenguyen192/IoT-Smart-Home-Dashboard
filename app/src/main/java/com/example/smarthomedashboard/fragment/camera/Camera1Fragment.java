@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -24,17 +25,27 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.smarthomedashboard.R;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
+
+import org.w3c.dom.Text;
 
 public class Camera1Fragment extends Fragment {
 
     // Declare
     private boolean camAvailable = true;
+
     private final String camUrl = "http://smarthomecamera.ddns.net:8081";
+    private String camName = "Cam 1";
+    private String camInfo = "Out door";
 
     private WebView cam;
     private ProgressBar progressBar;
@@ -148,24 +159,51 @@ public class Camera1Fragment extends Fragment {
     }
 
     public void ShowPopup(View v) {
+        ImageView popup_qrCode;
         TextView txtclose;
-        Button btnFollow;
-
-        //mytv = (TextView) myDialog.findViewById(R.id.yourtextviewId);
-        //mytv.setText("Value");
+        TextView txtCamName;
+        TextView txtCamInfo;
+        TextView txtCamUrl;
+        Button btnExternalShare;
 
         myDialog.setContentView(R.layout.fragment_camera_popup);
         txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
         txtclose.setText("X");
-        //btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+
         txtclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myDialog.dismiss();
             }
         });
+
+        txtCamName =(TextView) myDialog.findViewById(R.id.popup_camName);
+        txtCamName.setText(camName);
+        txtCamInfo =(TextView) myDialog.findViewById(R.id.popup_camInfo);
+        txtCamInfo.setText(camInfo);
+        txtCamUrl =(TextView) myDialog.findViewById(R.id.popup_camUrl);
+        txtCamUrl.setText(camUrl);
+
+        popup_qrCode = myDialog.findViewById(R.id.popup_qrCode);
+        generateQrCode(popup_qrCode);
+
+        //btnExternalShare = (Button) myDialog.findViewById(R.id.btnExternalShare);
+
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
     }
 
+    public void generateQrCode(ImageView barcode) {
+        String data_in_code="Hello Bar Code Data";
+        MultiFormatWriter multiFormatWriter=new MultiFormatWriter();
+        try{
+            BitMatrix bitMatrix=multiFormatWriter.encode(data_in_code, BarcodeFormat.QR_CODE,200,200);
+            BarcodeEncoder barcodeEncoder=new BarcodeEncoder();
+            Bitmap bitmap=barcodeEncoder.createBitmap(bitMatrix);
+            barcode.setImageBitmap(bitmap);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
