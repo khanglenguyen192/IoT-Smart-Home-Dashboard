@@ -1,7 +1,10 @@
 package com.example.smarthomedashboard.fragment.camera;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -19,8 +22,10 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.smarthomedashboard.R;
@@ -28,8 +33,10 @@ import com.example.smarthomedashboard.R;
 public class Camera1Fragment extends Fragment {
 
     // Declare
-    private final String cam1Url = "http://smarthomecamera.ddns.net:8081";
-    private WebView cam1;
+    private boolean camAvailable = true;
+    private final String camUrl = "http://smarthomecamera.ddns.net:8081";
+
+    private WebView cam;
     private ProgressBar progressBar;
 
     private ImageButton captureButton;
@@ -38,10 +45,11 @@ public class Camera1Fragment extends Fragment {
     private ImageButton shareButton;
     private ImageButton settingButton;
 
+    private Dialog myDialog;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -50,16 +58,16 @@ public class Camera1Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_camera1, container, false);
 
-        cam1 = (WebView)view.findViewById(R.id.cam1);
+        cam = (WebView)view.findViewById(R.id.cam1);
         progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
 
-        cam1.setWebViewClient(new WebViewClient());
-        cam1.loadUrl(cam1Url);
+        cam.setWebViewClient(new WebViewClient());
+        cam.loadUrl(camUrl);
         //enable JavaScript
-        WebSettings webSettings = cam1.getSettings();
+        WebSettings webSettings = cam.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        cam1.setWebViewClient(new WebViewClient(){
+        cam.setWebViewClient(new WebViewClient(){
             //Method control page start + page finish functionality..
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -84,14 +92,29 @@ public class Camera1Fragment extends Fragment {
             }
         });
 
-        //cameraSetup();
+        infoButton = view.findViewById(R.id.infoButton);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
 
         refreshButton = view.findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cam1.loadUrl(cam1Url);
+                cam.loadUrl(camUrl);
                 connectionStatus();
+            }
+        });
+
+        myDialog = new Dialog(getContext());
+        shareButton = view.findViewById(R.id.shareButton);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowPopup(view);
             }
         });
 
@@ -122,6 +145,27 @@ public class Camera1Fragment extends Fragment {
             return false;
         }
         return true;
+    }
+
+    public void ShowPopup(View v) {
+        TextView txtclose;
+        Button btnFollow;
+
+        //mytv = (TextView) myDialog.findViewById(R.id.yourtextviewId);
+        //mytv.setText("Value");
+
+        myDialog.setContentView(R.layout.fragment_camera_popup);
+        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose.setText("X");
+        //btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 
 }
