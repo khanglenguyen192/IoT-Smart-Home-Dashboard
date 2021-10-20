@@ -1,10 +1,12 @@
 package com.example.smarthomedashboard.fragment.camera;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -17,7 +19,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
@@ -45,6 +51,8 @@ import com.example.smarthomedashboard.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.w3c.dom.Text;
@@ -60,8 +68,11 @@ public class Camera1Fragment extends Fragment {
 
     // Declare
     private boolean camAvailable = true;
+    private static final int CAMERA_PERMISSION_CODE = 101;
+    private String qrResult = "";
+    private TextView textView;
 
-    private final String camUrl = "http://smarthomecamera.ddns.net:8081";
+    private String camUrl = "http://smarthomecamera.ddns.net:8081";
     private String camName = "Cam 1";
     private String camInfo = "Out door";
 
@@ -87,8 +98,10 @@ public class Camera1Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_camera1, container, false);
 
-        cam = (WebView)view.findViewById(R.id.cam1);
-        progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
+        textView = view.findViewById(R.id.data_text);
+
+        cam = (WebView) view.findViewById(R.id.cam1);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 
         cam.setWebViewClient(new WebViewClient());
         cam.loadUrl(camUrl);
@@ -96,7 +109,7 @@ public class Camera1Fragment extends Fragment {
         WebSettings webSettings = cam.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        cam.setWebViewClient(new WebViewClient(){
+        cam.setWebViewClient(new WebViewClient() {
             //Method control page start + page finish functionality..
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -163,9 +176,10 @@ public class Camera1Fragment extends Fragment {
             }
         });
 
-        return  view;
+        return view;
     }
 
+    //Capture image support function:
     public static Bitmap viewToBitMap(View view, int width, int height) {
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -175,17 +189,17 @@ public class Camera1Fragment extends Fragment {
 
     public void startSave() {
         FileOutputStream fileOutputStream = null;
-        File file=getDisc();
+        File file = getDisc();
 
         if (!file.exists() && !file.mkdirs()) {
             Toast.makeText(getContext(), "Can't create directory to save Image", Toast.LENGTH_SHORT).show();
             return;
         }
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyymmsshhmmss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyymmsshhmmss");
         String date = simpleDateFormat.format(new Date());
         String name = "Img" + date + ".jpg";
-        String file_name=file.getAbsolutePath()+"/"+name;
-        File new_file = new File (file_name);
+        String file_name = file.getAbsolutePath() + "/" + name;
+        File new_file = new File(file_name);
         try {
             fileOutputStream = new FileOutputStream(new_file);
             Bitmap bitmap = viewToBitMap(cam, cam.getWidth(), cam.getHeight());
@@ -212,17 +226,18 @@ public class Camera1Fragment extends Fragment {
         return new File(file, "Image Demo");
     }
 
+    //Refresh support function
     protected void connectionStatus() {
         boolean check = checkConnection();
 
-        if(check==true) {
+        if (check == true) {
             Toast.makeText(getActivity(), "Internet is Connected", Toast.LENGTH_LONG).show();
-        }
-        else {
+        } else {
             Toast.makeText(getActivity(), "Failed to connect to internet.", Toast.LENGTH_LONG).show();
         }
     }
-    protected boolean checkConnection(){
+
+    protected boolean checkConnection() {
         ConnectivityManager conMan = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo networkInfo = conMan.getActiveNetworkInfo();
@@ -237,6 +252,7 @@ public class Camera1Fragment extends Fragment {
         return true;
     }
 
+    //Share support function:
     public void showSharePopup(View v) {
         ImageView popup_qrCode;
         TextView txtclose;
@@ -246,7 +262,7 @@ public class Camera1Fragment extends Fragment {
         Button btnExternalShare;
 
         myDialog.setContentView(R.layout.fragment_camera_share_popup);
-        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
         txtclose.setText("X");
 
         txtclose.setOnClickListener(new View.OnClickListener() {
@@ -256,15 +272,15 @@ public class Camera1Fragment extends Fragment {
             }
         });
 
-        txtCamName =(TextView) myDialog.findViewById(R.id.popup_camName);
+        txtCamName = (TextView) myDialog.findViewById(R.id.popup_camName);
         txtCamName.setText(camName);
-        txtCamInfo =(TextView) myDialog.findViewById(R.id.popup_camInfo);
+        txtCamInfo = (TextView) myDialog.findViewById(R.id.popup_camInfo);
         txtCamInfo.setText(camInfo);
-        txtCamUrl =(TextView) myDialog.findViewById(R.id.popup_camUrl);
+        txtCamUrl = (TextView) myDialog.findViewById(R.id.popup_camUrl);
         txtCamUrl.setText(camUrl);
 
         popup_qrCode = myDialog.findViewById(R.id.popup_qrCode);
-        generateQrCode(popup_qrCode);
+        generateQrCode(popup_qrCode, camUrl);
 
         //btnExternalShare = (Button) myDialog.findViewById(R.id.btnExternalShare);
 
@@ -272,20 +288,7 @@ public class Camera1Fragment extends Fragment {
         myDialog.show();
     }
 
-    public void generateQrCode(ImageView barcode) {
-        String data_in_code="Hello Bar Code Data";
-        MultiFormatWriter multiFormatWriter=new MultiFormatWriter();
-        try{
-            BitMatrix bitMatrix=multiFormatWriter.encode(data_in_code, BarcodeFormat.QR_CODE,200,200);
-            BarcodeEncoder barcodeEncoder=new BarcodeEncoder();
-            Bitmap bitmap=barcodeEncoder.createBitmap(bitMatrix);
-            barcode.setImageBitmap(bitmap);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
+    //Setting support function:
     private void showSettingPopup() {
         final int gravity = Gravity.CENTER;
         final Dialog dialog = new Dialog(getContext());
@@ -312,18 +315,38 @@ public class Camera1Fragment extends Fragment {
         EditText editCamUrl = dialog.findViewById(R.id.edit_camUrl);
         Button btnGoBack = dialog.findViewById(R.id.btn_go_back);
         Button btnOk = dialog.findViewById(R.id.btn_ok);
+        ImageButton btnQrScanner = dialog.findViewById(R.id.btn_qrScanner);
 
         editCamName.setText(camName);
         editCamInfo.setText(camInfo);
         editCamUrl.setText(camUrl);
 
+        btnQrScanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Build.VERSION.SDK_INT>=23){
+                    if(checkPermission(Manifest.permission.CAMERA)){
+                        openScanner();
+                    }
+                    else{
+                        requestPermission(Manifest.permission.CAMERA,CAMERA_PERMISSION_CODE);
+                    }
+                }
+                else{
+                    openScanner();
+                }
+                //scanQrCode();
+                //Toast.makeText(getActivity(), "result: " + qrResult, Toast.LENGTH_SHORT).show();
+                //editCamUrl.setText(qrResult);
+                dialog.show();
+            }
+        });
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
-
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -335,7 +358,10 @@ public class Camera1Fragment extends Fragment {
                         // The dialog is automatically dismissed when a dialog button is clicked.
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // Continue with delete operation
+                                // Commit to change setting
+                                camName = editCamName.getText().toString();
+                                camInfo = editCamInfo.getText().toString();
+                                camUrl = editCamUrl.getText().toString();
                                 Toast.makeText(getActivity(), "Confirm change", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
@@ -349,5 +375,83 @@ public class Camera1Fragment extends Fragment {
         });
 
         dialog.show();
+    }
+
+    //QrCode Generator support function
+    public void generateQrCode(ImageView barcode, String data) {
+        String data_in_code = data;
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(data_in_code, BarcodeFormat.QR_CODE, 200, 200);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            barcode.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //QrCode Scanner support function
+    public void scanQrCode() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkPermission(Manifest.permission.CAMERA)) {
+                openScanner();
+            } else {
+                requestPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION_CODE);
+            }
+        } else {
+            openScanner();
+        }
+    }
+
+    //Calling inbuilt scanner
+    private void openScanner() {
+        new IntentIntegrator(getActivity()).initiateScan();
+    }
+    //Parse the data
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult result=IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
+        if(result!=null){
+            if(result.getContents()==null){
+                Toast.makeText(getContext(), "Blank", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getContext(), "result: "+ result.getContents(), Toast.LENGTH_SHORT).show();
+                textView.setText("Data : "+result.getContents());
+            }
+        }
+        else{
+            Toast.makeText(getContext(), "Blank", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean checkPermission(String permission) {
+        int result = ContextCompat.checkSelfPermission(getContext(), permission);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void requestPermission(String permision, int code) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permision)) {
+
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{permision}, code);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case CAMERA_PERMISSION_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openScanner();
+                }
+        }
     }
 }

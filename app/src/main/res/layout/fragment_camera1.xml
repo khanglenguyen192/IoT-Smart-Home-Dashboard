@@ -108,5 +108,12 @@
         android:src="@drawable/camera_icon_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/data_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Data : "
+        android:textColor="#000" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
