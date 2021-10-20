@@ -1,7 +1,9 @@
 package com.example.smarthomedashboard.fragment.camera;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -20,15 +22,19 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -55,8 +61,7 @@ public class Camera1Fragment extends Fragment {
     // Declare
     private boolean camAvailable = true;
 
-    private final String camUrl = "https://www.google.com.vn/?hl=vi";
-    //private final String camUrl = "http://smarthomecamera.ddns.net:8081";
+    private final String camUrl = "http://smarthomecamera.ddns.net:8081";
     private String camName = "Cam 1";
     private String camInfo = "Out door";
 
@@ -120,7 +125,6 @@ public class Camera1Fragment extends Fragment {
         captureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Bitmap bm = getBitmapFromView(cam);
                 startSave();
             }
         });
@@ -129,7 +133,7 @@ public class Camera1Fragment extends Fragment {
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                showSharePopup(view);
             }
         });
 
@@ -147,7 +151,15 @@ public class Camera1Fragment extends Fragment {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShowPopup(view);
+                showSharePopup(view);
+            }
+        });
+
+        settingButton = view.findViewById(R.id.settingButton);
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSettingPopup();
             }
         });
 
@@ -225,7 +237,7 @@ public class Camera1Fragment extends Fragment {
         return true;
     }
 
-    public void ShowPopup(View v) {
+    public void showSharePopup(View v) {
         ImageView popup_qrCode;
         TextView txtclose;
         TextView txtCamName;
@@ -233,7 +245,7 @@ public class Camera1Fragment extends Fragment {
         TextView txtCamUrl;
         Button btnExternalShare;
 
-        myDialog.setContentView(R.layout.fragment_camera_popup);
+        myDialog.setContentView(R.layout.fragment_camera_share_popup);
         txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
         txtclose.setText("X");
 
@@ -272,5 +284,70 @@ public class Camera1Fragment extends Fragment {
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void showSettingPopup() {
+        final int gravity = Gravity.CENTER;
+        final Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.fragment_camera_setting_popup);
+
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        //dialog location
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = gravity;
+        window.setAttributes(windowAttributes);
+
+        dialog.setCancelable(true);
+
+        EditText editCamName = dialog.findViewById(R.id.edit_camName);
+        EditText editCamInfo = dialog.findViewById(R.id.edit_camInfo);
+        EditText editCamUrl = dialog.findViewById(R.id.edit_camUrl);
+        Button btnGoBack = dialog.findViewById(R.id.btn_go_back);
+        Button btnOk = dialog.findViewById(R.id.btn_ok);
+
+        editCamName.setText(camName);
+        editCamInfo.setText(camInfo);
+        editCamUrl.setText(camUrl);
+
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(getContext(), R.style.MyAlertDialogStyle)
+                        .setTitle("Confirm change")
+                        .setMessage("Are you sure you want to change this setting? You cannot revert the change!")
+
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Continue with delete operation
+                                Toast.makeText(getActivity(), "Confirm change", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        })
+
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setNegativeButton(android.R.string.no, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
+
+        dialog.show();
     }
 }

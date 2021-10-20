@@ -7,31 +7,13 @@
     tools:context=".fragment.camera.Camera1Fragment"
     android:background="@color/colorPrimaryRed">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:background="@drawable/camera_background"
-
-        android:gravity="center"
-
-        android:text="Camera 1"
-        android:textColor="@color/baseYellowColor"
-        android:textSize="32sp"
-
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <WebView
         android:id="@+id/cam1"
         android:layout_width="412dp"
         android:layout_height="563dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="44dp"
         app:layout_constraintBottom_toTopOf="@+id/captureButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp"
         tools:visibility="visible" />

@@ -27,6 +27,13 @@
         <entry key="..\:/android studio/SmartHomeDashboard/app/src/main/res/layout/fragment_setting.xml" value="0.36666666666666664" />
         <entry key="..\:/android studio/SmartHomeDashboard/app/src/main/res/layout/home.xml" value="0.35260416666666666" />
         <entry key="..\:/android studio/SmartHomeDashboard/app/src/main/res/menu/menu_bottom_nav.xml" value="0.36666666666666664" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable-v24/bg_gray_corner_10.xml" value="0.2203125" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable-v24/bg_yellow_corner_10.xml" value="0.2203125" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/bg_gray_corner_10.xml" value="0.2203125" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/bg_white_corner_10_border_gray.xml" value="0.2203125" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/bg_white_corner_16.xml" value="0.2203125" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/bg_yellow_corner_10.xml" value="0.2203125" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/bg_yellow_corner_16_top_left_top_right.xml" value="0.2203125" />
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/camera_button_style.xml" value="0.1125" />
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/camera_icon_add.xml" value="0.1125" />
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/camera_icon_refresh.xml" value="0.1125" />
@@ -34,6 +41,8 @@
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera.xml" value="0.1" />
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera1.xml" value="0.18" />
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera_popup.xml" value="0.20416666666666666" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera_setting.xml" value="0.20416666666666666" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera_setting_popup.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
