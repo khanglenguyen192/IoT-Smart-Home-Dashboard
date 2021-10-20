@@ -324,21 +324,20 @@ public class Camera1Fragment extends Fragment {
         btnQrScanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Build.VERSION.SDK_INT>=23){
-                    if(checkPermission(Manifest.permission.CAMERA)){
-                        openScanner();
-                    }
-                    else{
-                        requestPermission(Manifest.permission.CAMERA,CAMERA_PERMISSION_CODE);
-                    }
-                }
-                else{
-                    openScanner();
-                }
-                //scanQrCode();
-                //Toast.makeText(getActivity(), "result: " + qrResult, Toast.LENGTH_SHORT).show();
-                //editCamUrl.setText(qrResult);
-                dialog.show();
+                //Initialize intent integerator
+                IntentIntegrator intentIntegrator = new IntentIntegrator(getActivity());
+                //set prompt text
+                intentIntegrator.setPrompt("For flash use volume up key");
+                //Set beep
+                intentIntegrator.setBeepEnabled(true);
+                //Locked oriented
+                intentIntegrator.setOrientationLocked(true);
+                //Set capture activity
+                intentIntegrator.setCaptureActivity(Capture.class);
+                //Initiate scan
+                intentIntegrator.forSupportFragment(Camera1Fragment.this).initiateScan();
+                editCamUrl.setText(qrResult);
+                dialog.dismiss();
             }
         });
         btnGoBack.setOnClickListener(new View.OnClickListener() {
@@ -392,66 +391,21 @@ public class Camera1Fragment extends Fragment {
     }
 
     //QrCode Scanner support function
-    public void scanQrCode() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkPermission(Manifest.permission.CAMERA)) {
-                openScanner();
-            } else {
-                requestPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION_CODE);
-            }
-        } else {
-            openScanner();
-        }
-    }
-
-    //Calling inbuilt scanner
-    private void openScanner() {
-        new IntentIntegrator(getActivity()).initiateScan();
-    }
-    //Parse the data
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        IntentResult result=IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
-        if(result!=null){
-            if(result.getContents()==null){
-                Toast.makeText(getContext(), "Blank", Toast.LENGTH_SHORT).show();
-            }
-            else{
-                Toast.makeText(getContext(), "result: "+ result.getContents(), Toast.LENGTH_SHORT).show();
-                textView.setText("Data : "+result.getContents());
-            }
+        //Initialize intent result
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        //Check condition
+        if (intentResult.getContents() != null) {
+            textView.setText(intentResult.getContents());
+            qrResult = intentResult.getContents();
+            Toast.makeText(getContext(), intentResult.getContents(), Toast.LENGTH_LONG);
+        }else {
+            //When result content is null
+            //Display toast
+            Toast.makeText(getContext(), "OOPS... You did not scan anything", Toast.LENGTH_SHORT).show();
         }
-        else{
-            Toast.makeText(getContext(), "Blank", Toast.LENGTH_SHORT).show();
-        }
-    }
 
-    private boolean checkPermission(String permission) {
-        int result = ContextCompat.checkSelfPermission(getContext(), permission);
-        if (result == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private void requestPermission(String permision, int code) {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permision)) {
-
-        } else {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{permision}, code);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case CAMERA_PERMISSION_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    openScanner();
-                }
-        }
     }
 }
