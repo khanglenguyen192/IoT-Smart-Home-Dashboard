@@ -68,8 +68,6 @@ public class Camera1Fragment extends Fragment {
 
     // Declare
     private boolean camAvailable = true;
-    private static final int CAMERA_PERMISSION_CODE = 101;
-    private String qrResult = "";
     private TextView textView;
 
     private String camUrl = "http://smarthomecamera.ddns.net:8081";
@@ -98,9 +96,7 @@ public class Camera1Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_camera1, container, false);
 
-        textView = view.findViewById(R.id.data_text);
-
-        cam = (WebView) view.findViewById(R.id.cam1);
+        cam = (WebView) view.findViewById(R.id.cam);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 
         cam.setWebViewClient(new WebViewClient());
@@ -227,7 +223,7 @@ public class Camera1Fragment extends Fragment {
     }
 
     //Refresh support function
-    protected void connectionStatus() {
+    public void connectionStatus() {
         boolean check = checkConnection();
 
         if (check == true) {
@@ -237,7 +233,7 @@ public class Camera1Fragment extends Fragment {
         }
     }
 
-    protected boolean checkConnection() {
+    public boolean checkConnection() {
         ConnectivityManager conMan = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo networkInfo = conMan.getActiveNetworkInfo();
@@ -289,7 +285,7 @@ public class Camera1Fragment extends Fragment {
     }
 
     //Setting support function:
-    private void showSettingPopup() {
+    public void showSettingPopup() {
         final int gravity = Gravity.CENTER;
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -336,7 +332,7 @@ public class Camera1Fragment extends Fragment {
                 intentIntegrator.setCaptureActivity(Capture.class);
                 //Initiate scan
                 intentIntegrator.forSupportFragment(Camera1Fragment.this).initiateScan();
-                editCamUrl.setText(qrResult);
+                cam.loadUrl(camUrl);
                 dialog.dismiss();
             }
         });
@@ -398,8 +394,7 @@ public class Camera1Fragment extends Fragment {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         //Check condition
         if (intentResult.getContents() != null) {
-            textView.setText(intentResult.getContents());
-            qrResult = intentResult.getContents();
+            camUrl = intentResult.getContents();
             Toast.makeText(getContext(), intentResult.getContents(), Toast.LENGTH_LONG);
         }else {
             //When result content is null
