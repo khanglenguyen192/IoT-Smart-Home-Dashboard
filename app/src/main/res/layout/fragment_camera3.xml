@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp"
-        tools:visibility="visible" />
+        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/txtNoti"

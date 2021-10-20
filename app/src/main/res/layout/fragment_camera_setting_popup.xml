@@ -91,5 +91,16 @@
                 android:textColor="@color/black"
                 android:text="OK" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:background="@color/red"
+            android:textColor="@color/black"
+            android:text="DELETE"/>
+
     </LinearLayout>
 </LinearLayout>

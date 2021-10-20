@@ -66,6 +66,7 @@ public class Camera2Fragment extends Fragment {
 
     private WebView cam;
     private ProgressBar progressBar;
+    private TextView txtNoti;
 
     private ImageButton captureButton;
     private ImageButton infoButton;
@@ -88,6 +89,7 @@ public class Camera2Fragment extends Fragment {
 
         cam = (WebView) view.findViewById(R.id.cam);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        txtNoti = (TextView) view.findViewById(R.id.txtNoti);
 
         cam.setWebViewClient(new WebViewClient());
         cam.loadUrl(camUrl);
@@ -161,6 +163,8 @@ public class Camera2Fragment extends Fragment {
                 showSettingPopup();
             }
         });
+
+        setState();
 
         return view;
     }
@@ -299,9 +303,10 @@ public class Camera2Fragment extends Fragment {
         EditText editCamName = dialog.findViewById(R.id.edit_camName);
         EditText editCamInfo = dialog.findViewById(R.id.edit_camInfo);
         EditText editCamUrl = dialog.findViewById(R.id.edit_camUrl);
+        ImageButton btnQrScanner = dialog.findViewById(R.id.btn_qrScanner);
         Button btnGoBack = dialog.findViewById(R.id.btn_go_back);
         Button btnOk = dialog.findViewById(R.id.btn_ok);
-        ImageButton btnQrScanner = dialog.findViewById(R.id.btn_qrScanner);
+        Button btnDelete = dialog.findViewById(R.id.btn_delete);
 
         editCamName.setText(camName);
         editCamInfo.setText(camInfo);
@@ -323,6 +328,7 @@ public class Camera2Fragment extends Fragment {
                 //Initiate scan
                 intentIntegrator.forSupportFragment(Camera2Fragment.this).initiateScan();
                 cam.loadUrl(camUrl);
+                setState();
                 dialog.dismiss();
             }
         });
@@ -347,6 +353,37 @@ public class Camera2Fragment extends Fragment {
                                 camName = editCamName.getText().toString();
                                 camInfo = editCamInfo.getText().toString();
                                 camUrl = editCamUrl.getText().toString();
+                                setState();
+                                Toast.makeText(getActivity(), "Confirm change", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        })
+
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setNegativeButton(android.R.string.no, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(getContext(), R.style.MyAlertDialogStyle)
+                        .setTitle("Confirm change")
+                        .setMessage("Are you sure you want to delete this camera? You cannot revert the change!")
+
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Commit to change setting
+                                camName = "";
+                                camInfo = "";
+                                camUrl = "";
+                                editCamName.setText(camName);
+                                editCamInfo.setText(camInfo);
+                                editCamUrl.setText(camUrl);
+                                setState();
                                 Toast.makeText(getActivity(), "Confirm change", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
@@ -386,11 +423,25 @@ public class Camera2Fragment extends Fragment {
         if (intentResult.getContents() != null) {
             camUrl = intentResult.getContents();
             Toast.makeText(getContext(), intentResult.getContents(), Toast.LENGTH_LONG);
-        }else {
+        } else {
             //When result content is null
             //Display toast
             Toast.makeText(getContext(), "OOPS... You did not scan anything", Toast.LENGTH_SHORT).show();
         }
+    }
 
+    //Set visibility
+    public void setState() {
+        if (camName.isEmpty() && camInfo.isEmpty() && camUrl.isEmpty()) {
+            camAvailable = false;
+            cam.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+            txtNoti.setVisibility(View.VISIBLE);
+        } else {
+            camAvailable = true;
+            cam.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
+            txtNoti.setVisibility(View.GONE);
+        }
     }
 }

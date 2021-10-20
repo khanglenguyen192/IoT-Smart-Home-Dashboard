@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.camera.Camera1Fragment"
-    android:background="@color/purple_700">
+    android:background="@drawable/camera_background">
 
     <WebView
         android:id="@+id/cam"
@@ -16,6 +16,21 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp"
+        tools:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/txtNoti"
+        android:layout_width="409dp"
+        android:layout_height="563dp"
+        android:layout_marginBottom="44dp"
+        android:text="NOTHING HERE"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/captureButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
         tools:visibility="visible" />
 
     <ProgressBar

@@ -18,6 +18,21 @@
         tools:layout_editor_absoluteX="1dp"
         tools:visibility="visible" />
 
+    <TextView
+        android:id="@+id/txtNoti"
+        android:layout_width="409dp"
+        android:layout_height="563dp"
+        android:layout_marginBottom="44dp"
+        android:text="NOTHING HERE"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/captureButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:visibility="invisible" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
