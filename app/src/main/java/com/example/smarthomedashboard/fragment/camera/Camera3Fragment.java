@@ -103,7 +103,6 @@ public class Camera3Fragment extends Fragment {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 //set progressBar when page loading is start...
                 progressBar.setVisibility(View.VISIBLE);
-                getActivity().setTitle("Loading");
                 super.onPageStarted(view, url, favicon);
             }
 
