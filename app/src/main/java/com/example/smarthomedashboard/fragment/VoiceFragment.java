@@ -17,9 +17,32 @@ import android.widget.TextView;
 
 import com.example.smarthomedashboard.R;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 public class VoiceFragment extends Fragment {
+
+    //Language processing
+    public enum Location {
+        NO_ROOM,
+        LIVING_ROOM,
+        BEDROOM,
+        DINNING_ROOM
+    }
+
+    public enum Device {
+        NO_DEVICE,
+        LIGHT,
+        AIR_CONDITIONER
+    }
+
+    public enum Action {
+        NO_ACTION,
+        ON,
+        OFF,
+        GET,
+    }
 
     TextView textView;
     ImageButton speaker;
@@ -60,7 +83,8 @@ public class VoiceFragment extends Fragment {
         if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
             textView.setText(data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0));
             //Text to speech
-            speak(textView.getText().toString());
+            //speak(textView.getText().toString());
+            handleSpeech(textView.getText().toString());
         }
     }
 
@@ -75,5 +99,73 @@ public class VoiceFragment extends Fragment {
                 }
             }
         });
+    }
+
+    void handleSpeech(String txt) {
+        if (txt.equals("hello")) {
+            textView.setText("Hello, how can i help you");
+            speak("Hello, how can i help you");
+        } else if (txt.equals("what is your name")) {
+            textView.setText("My name is Smart Home");
+            speak("My name is Smart Home");
+        } else if (txt.equals("how are you")) {
+            textView.setText("I'm fine, thank you, and you");
+            speak("I'm fine, thank you, and you");
+        } else if (txt.equals("what can I ask you")) {
+            textView.setText("You can ask me anything to help you");
+            speak("You can ask me anything to help you");
+        } else if (txt.equals("tell me a joke")) {
+            textView.setText("What did one snowman say to the other? Do you smell carrots?");
+            speak("What did one snowman say to the other? Do you smell carrots?");
+        } else if (txt.equals("how is the weather")) {
+            textView.setText("It is sunny");
+            speak("It is sunny");
+        } else {
+            //Process language
+            List<Object> order = processLanguage(txt);
+            Location location = (Location) order.get(0);
+            Device device = (Device) order.get(1);
+            Action action = (Action) order.get(2);
+
+            if (location != Location.NO_ROOM && device != Device.NO_DEVICE && action != Action.NO_ACTION) {
+                textView.setText(location.toString() + " " + device.toString() + " " + action.toString());
+            } else {
+                textView.setText("Sorry I don't understand");
+                speak("Sorry I don't understand");
+            }
+        }
+    }
+
+    public static List<Object> processLanguage(String text) {
+        Location location = Location.NO_ROOM;
+        Device device = Device.NO_DEVICE;
+        Action action = Action.NO_ACTION;
+
+        //Identify location
+        if (text.contains("living") && text.contains("room")) {
+            location = Location.LIVING_ROOM;
+        } else if (text.contains("bed") && text.contains("room")) {
+            location = Location.BEDROOM;
+        } else if (text.contains("dining") && text.contains("room")) {
+            location = Location.DINNING_ROOM;
+        }
+
+        //Identify device
+        if (text.contains("light")) {
+            device = Device.LIGHT;
+        } else if (text.contains("air") && text.contains("condition")) {
+            device = Device.AIR_CONDITIONER;
+        }
+
+        //Identify action
+        if (text.contains(" on ") || text.contains(" on")) {
+            action = Action.ON;
+        } else if (text.contains("off")) {
+            action = Action.OFF;
+        } else if (text.contains("get") || text.contains("what") || text.contains("how") || text.contains("show")) {
+            action = Action.GET;
+        }
+
+        return Arrays.asList(location, device, action);
     }
 }
