@@ -118,16 +118,20 @@ public class Camera1Fragment extends Fragment {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                progressBar.setVisibility(View.GONE);
-                getActivity().setTitle(view.getTitle());
-                super.onPageFinished(view, url);
+                try{
+                    progressBar.setVisibility(View.GONE);
+                    getActivity().setTitle(view.getTitle());
+                    super.onPageFinished(view, url);
+                }
+                catch(Exception e){
+                }
             }
 
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                Toast.makeText(getActivity(), "Your Internet Connection may not be active Or " + error.getDescription(), Toast.LENGTH_LONG).show();
                 super.onReceivedError(view, request, error);
+                Toast.makeText(view.getContext(), "Your Internet Connection may not be active Or " + error.getDescription(), Toast.LENGTH_LONG).show();
             }
         });
 

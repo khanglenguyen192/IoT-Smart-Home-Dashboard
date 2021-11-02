@@ -3,6 +3,8 @@ package com.example.smarthomedashboard.mqtt;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.smarthomedashboard.MainActivity;
+
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -22,12 +24,7 @@ public class MQTTHelper {
 
     final String subscriptionTopic = "bksmartiot/feeds/+";
     final String username = "bksmartiot";
-    final String password = "aio_vsnh58zLsDHGXGbWJTXBhVNKIiAh";
-
-//    private String clientId = "1913695";
-//    final String subscriptionTopic = "khangle19022001/f/+";
-//    final String username = "khangle19022001";
-//    final String password = "aio_GboL68h0xQIpSd2aAmczi9IkhQyS";
+    final String password = MainActivity.AIO_key;
 
     public MqttAndroidClient mqttAndroidClient;
 

@@ -6,9 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 
-import com.example.smarthomedashboard.Fragment.ChartFragment;
-import com.example.smarthomedashboard.Fragment.HomeFragment;
-import com.example.smarthomedashboard.Fragment.SettingFragment;
+import com.example.smarthomedashboard.fragment.ChartFragment;
+import com.example.smarthomedashboard.fragment.HomeFragment;
+import com.example.smarthomedashboard.fragment.SettingFragment;
 import com.example.smarthomedashboard.fragment.CameraFragment;
 import com.example.smarthomedashboard.fragment.VoiceFragment;
 

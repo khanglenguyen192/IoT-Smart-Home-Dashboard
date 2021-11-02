@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ProgressBar
-            android:id="@+id/tempProgressBar"
+            android:id="@+id/tempProgressBar_1"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerVertical="true"
@@ -33,51 +33,50 @@
             tools:progress="25" />
 
         <TextView
+            android:id="@+id/tempText_1"
             android:layout_width="33dp"
             android:layout_height="16dp"
-            android:layout_alignStart="@+id/tempProgressBar"
-            android:layout_alignTop="@+id/tempProgressBar"
-            android:layout_alignEnd="@+id/tempProgressBar"
-            android:layout_alignBottom="@+id/tempProgressBar"
+            android:layout_alignStart="@+id/tempProgressBar_1"
+            android:layout_alignTop="@+id/tempProgressBar_1"
+            android:layout_alignEnd="@+id/tempProgressBar_1"
+            android:layout_alignBottom="@+id/tempProgressBar_1"
             android:layout_marginStart="23.5dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="23.5dp"
             android:layout_marginBottom="32dp"
             android:gravity="center"
-            android:text="90°C"
             android:textSize="14dp"
             android:textStyle="bold" />
 
         <ProgressBar
-            android:tag="humidProgress"
-            android:id="@+id/humidProgressBar"
+            android:id="@+id/humidProgressBar_1"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerInParent="true"
             android:background="@android:color/transparent"
             android:indeterminateOnly="false"
             android:progressDrawable="@drawable/circle_humidity"
+            android:tag="humidProgress"
             tools:progress="25" />
 
         <TextView
+            android:id="@+id/humidText_1"
             android:layout_width="33dp"
             android:layout_height="16dp"
-            android:layout_alignStart="@+id/humidProgressBar"
-            android:layout_alignTop="@+id/humidProgressBar"
-            android:layout_alignEnd="@+id/humidProgressBar"
-            android:layout_alignBottom="@+id/humidProgressBar"
+            android:layout_alignStart="@+id/humidProgressBar_1"
+            android:layout_alignTop="@+id/humidProgressBar_1"
+            android:layout_alignEnd="@+id/humidProgressBar_1"
+            android:layout_alignBottom="@+id/humidProgressBar_1"
             android:layout_marginStart="23.5dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="23.5dp"
             android:layout_marginBottom="32dp"
             android:gravity="center"
-            android:text="90°C"
             android:textSize="14dp"
             android:textStyle="bold" />
 
         <ProgressBar
-            android:tag="gasProgress"
-            android:id="@+id/gasProgressBar"
+            android:id="@+id/gasProgressBar_1"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentEnd="true"
@@ -86,21 +85,22 @@
             android:background="@android:color/transparent"
             android:indeterminateOnly="false"
             android:progressDrawable="@drawable/circle_rain"
+            android:tag="gasProgress"
             tools:progress="25" />
 
         <TextView
+            android:id="@+id/gasText_1"
             android:layout_width="33dp"
             android:layout_height="16dp"
-            android:layout_alignStart="@+id/gasProgressBar"
-            android:layout_alignTop="@+id/gasProgressBar"
-            android:layout_alignEnd="@+id/gasProgressBar"
-            android:layout_alignBottom="@+id/gasProgressBar"
+            android:layout_alignStart="@+id/gasProgressBar_1"
+            android:layout_alignTop="@+id/gasProgressBar_1"
+            android:layout_alignEnd="@+id/gasProgressBar_1"
+            android:layout_alignBottom="@+id/gasProgressBar_1"
             android:layout_marginStart="23.5dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="23.5dp"
             android:layout_marginBottom="32dp"
             android:gravity="center"
-            android:text="90°C"
             android:textSize="14dp"
             android:textStyle="bold" />
 
@@ -117,59 +117,59 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginBottom="392dp"
-                android:text="Room Setting"
-                android:textSize="25dp"
-                android:textColor="@color/dark"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.092"
-                app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginBottom="392dp"
+            android:text="Room Setting"
+            android:textSize="25dp"
+            android:textColor="@color/dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.092"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/living_room_light"
-                android:layout_width="@dimen/baseCardButtonWidth"
-                android:layout_height="@dimen/baseCardButtonHeight"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/living_room_light"
+            android:layout_width="@dimen/baseCardButtonWidth"
+            android:layout_height="@dimen/baseCardButtonHeight"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center">
 
-                    <ImageView
-                        android:id="@+id/imageView30"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/img_light_off"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/imageView30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/img_light_off"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Light"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Light"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/living_room_air_conditioner"
@@ -230,7 +230,7 @@
         android:visibility="invisible">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/living_room_light1"
+            android:id="@+id/living_room_light_1"
             android:layout_width="@dimen/baseCardButtonWidth"
             android:layout_height="@dimen/baseCardButtonHeight"
             android:layout_marginStart="30dp"
@@ -247,7 +247,7 @@
                 android:layout_gravity="center">
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/imageView_1"
                     android:layout_width="29dp"
                     android:layout_height="34dp"
                     android:layout_gravity="center"
@@ -258,7 +258,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/textView_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -266,9 +266,10 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView1" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_1" />
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/living_room_switch_light_1"
                     android:layout_width="60dp"
                     android:layout_height="17dp"
                     android:layout_gravity="left"
@@ -276,7 +277,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView1"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_1"
                     app:layout_constraintVertical_bias="0.36"
                     app:track="@drawable/track" />
 
@@ -286,16 +287,16 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/living_room_light4"
+            android:id="@+id/living_room_light_4"
             android:layout_width="@dimen/baseCardButtonWidth"
             android:layout_height="@dimen/baseCardButtonHeight"
             app:cardBackgroundColor="@color/white"
             app:cardElevation="4dp"
             app:cardCornerRadius="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/living_room_light3"
-            app:layout_constraintEnd_toEndOf="@+id/living_room_light2"
-            app:layout_constraintStart_toStartOf="@+id/living_room_light2"
-            app:layout_constraintTop_toTopOf="@+id/living_room_light3"
+            app:layout_constraintBottom_toBottomOf="@+id/living_room_light_3"
+            app:layout_constraintEnd_toEndOf="@+id/living_room_light_2"
+            app:layout_constraintStart_toStartOf="@+id/living_room_light_2"
+            app:layout_constraintTop_toTopOf="@+id/living_room_light_3"
             app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -304,7 +305,7 @@
                 android:layout_gravity="center">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/imageView_4"
                     android:layout_width="29dp"
                     android:layout_height="34dp"
                     android:layout_gravity="center"
@@ -315,7 +316,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/textView_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -323,9 +324,10 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_4" />
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/living_room_switch_light_4"
                     android:layout_width="60dp"
                     android:layout_height="17dp"
                     android:layout_gravity="left"
@@ -333,7 +335,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_4"
                     app:layout_constraintVertical_bias="0.36"
                     app:track="@drawable/track" />
 
@@ -342,16 +344,16 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/living_room_light3"
+            android:id="@+id/living_room_light_3"
             android:layout_width="@dimen/baseCardButtonWidth"
             android:layout_height="@dimen/baseCardButtonHeight"
             android:layout_marginTop="52dp"
             app:cardBackgroundColor="@color/white"
             app:cardElevation="4dp"
             app:cardCornerRadius="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/living_room_light1"
-            app:layout_constraintStart_toStartOf="@+id/living_room_light1"
-            app:layout_constraintTop_toBottomOf="@+id/living_room_light1">
+            app:layout_constraintEnd_toEndOf="@+id/living_room_light_1"
+            app:layout_constraintStart_toStartOf="@+id/living_room_light_1"
+            app:layout_constraintTop_toBottomOf="@+id/living_room_light_1">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="84dp"
@@ -359,7 +361,7 @@
                 android:layout_gravity="center">
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/imageView_3"
                     android:layout_width="29dp"
                     android:layout_height="34dp"
                     android:layout_gravity="center"
@@ -370,7 +372,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/textView_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -378,9 +380,10 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_3" />
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/living_room_switch_light_3"
                     android:layout_width="60dp"
                     android:layout_height="17dp"
                     android:layout_gravity="left"
@@ -388,7 +391,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_3"
                     app:layout_constraintVertical_bias="0.36"
                     app:track="@drawable/track" />
 
@@ -397,17 +400,17 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/living_room_light2"
+            android:id="@+id/living_room_light_2"
             android:layout_width="@dimen/baseCardButtonWidth"
             android:layout_height="@dimen/baseCardButtonHeight"
             app:cardBackgroundColor="@color/white"
             app:cardElevation="4dp"
             app:cardCornerRadius="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/living_room_light1"
+            app:layout_constraintBottom_toBottomOf="@+id/living_room_light_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.552"
-            app:layout_constraintStart_toEndOf="@+id/living_room_light1"
-            app:layout_constraintTop_toTopOf="@+id/living_room_light1"
+            app:layout_constraintStart_toEndOf="@+id/living_room_light_1"
+            app:layout_constraintTop_toTopOf="@+id/living_room_light_1"
             app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -416,7 +419,7 @@
                 android:layout_gravity="center">
 
                 <ImageView
-                    android:id="@+id/imageView30"
+                    android:id="@+id/imageView_2"
                     android:layout_width="29dp"
                     android:layout_height="34dp"
                     android:layout_gravity="center"
@@ -435,9 +438,10 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView30" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_2" />
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/living_room_switch_light_2"
                     android:layout_width="60dp"
                     android:layout_height="17dp"
                     android:layout_gravity="left"
@@ -455,12 +459,14 @@
 
         <ImageButton
             android:id="@+id/living_room_btn_light_back"
-            android:layout_width="52dp"
-            android:layout_height="45dp"
-            android:layout_marginBottom="12dp"
+            android:layout_width="70dp"
+            android:layout_height="32dp"
+            android:background="@drawable/shape"
             android:src="@drawable/icon_back"
-            app:layout_constraintBottom_toTopOf="@+id/living_room_light1"
-            app:layout_constraintStart_toStartOf="@+id/living_room_light1" />
+            android:layout_marginBottom="8dp"
+            android:elevation="3dp"
+            app:layout_constraintBottom_toTopOf="@+id/living_room_light_1"
+            app:layout_constraintStart_toStartOf="@+id/living_room_light_1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -477,10 +483,12 @@
 
         <ImageButton
             android:id="@+id/living_room_btn_air_conditioner_back"
-            android:layout_width="52dp"
-            android:layout_height="45dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="70dp"
+            android:layout_height="32dp"
             android:src="@drawable/icon_back"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/shape"
+            android:elevation="3dp"
             app:layout_constraintBottom_toTopOf="@+id/living_room_air_conditioner_1"
             app:layout_constraintStart_toStartOf="@+id/living_room_air_conditioner_1" />
 
@@ -488,7 +496,7 @@
             android:id="@+id/living_room_air_conditioner_1"
             android:layout_width="350dp"
             android:layout_height="120dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="90dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
             app:cardElevation="4dp"
@@ -502,7 +510,7 @@
                 android:layout_gravity="center">
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/imageView_5"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
@@ -514,7 +522,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/textView_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -523,9 +531,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.061"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView1" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_5" />
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/living_room_switch_air_conditioner_1"
                     android:layout_width="60dp"
                     android:layout_height="17dp"
                     android:layout_gravity="left"
@@ -559,7 +568,7 @@
                 android:layout_gravity="center">
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/textView_6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -568,9 +577,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.061"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_6" />
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/living_room_switch_air_conditioner_2"
                     android:layout_width="60dp"
                     android:layout_height="17dp"
                     android:layout_gravity="left"
@@ -583,7 +593,7 @@
                     app:track="@drawable/track" />
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/imageView_6"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"

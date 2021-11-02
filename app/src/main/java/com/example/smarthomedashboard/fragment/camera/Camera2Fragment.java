@@ -108,9 +108,14 @@ public class Camera2Fragment extends Fragment {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                progressBar.setVisibility(View.GONE);
-                getActivity().setTitle(view.getTitle());
-                super.onPageFinished(view, url);
+                try {
+                    progressBar.setVisibility(View.GONE);
+                    getActivity().setTitle(view.getTitle());
+                    super.onPageFinished(view, url);
+                }
+                catch (Exception e){
+
+                }
             }
 
             @RequiresApi(api = Build.VERSION_CODES.M)
