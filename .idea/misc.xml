@@ -44,6 +44,7 @@
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/camera_icon_add.xml" value="0.1125" />
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/camera_icon_qrscanner.xml" value="0.1125" />
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/camera_icon_refresh.xml" value="0.1125" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/drawable/voice_icon_mic.xml" value="0.13541666666666666" />
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_bed_room.xml" value="0.1" />
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera.xml" value="0.1" />
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera1.xml" value="0.18" />
@@ -53,6 +54,10 @@
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera_popup.xml" value="0.20416666666666666" />
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera_setting.xml" value="0.20416666666666666" />
         <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera_setting_popup.xml" value="0.25" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_camera_share_popup.xml" value="0.11927083333333334" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_living_room.xml" value="0.11927083333333334" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_voice.xml" value="0.11927083333333334" />
+        <entry key="..\:/github/IoT-Smart-Home-Dashboard/app/src/main/res/menu/menu_bottom_nav.xml" value="0.1" />
       </map>
     </option>
   </component>

@@ -21,6 +21,6 @@
 
     <item
         android:id="@+id/action_voice"
-        android:icon="@drawable/camera_icon_capture"
+        android:icon="@drawable/voice_icon_mic"
         android:title="@string/action_voice" />
 </menu>
