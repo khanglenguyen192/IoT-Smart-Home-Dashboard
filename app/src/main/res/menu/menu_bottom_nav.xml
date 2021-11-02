@@ -18,4 +18,9 @@
         android:id="@+id/action_camera"
         android:icon="@drawable/camera_icon_capture"
         android:title="@string/action_camera" />
+
+    <item
+        android:id="@+id/action_voice"
+        android:icon="@drawable/camera_icon_capture"
+        android:title="@string/action_voice" />
 </menu>

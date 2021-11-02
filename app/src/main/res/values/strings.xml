@@ -5,6 +5,7 @@
     <string name="action_chart">Chart</string>
     <string name="action_setting">Setting</string>
     <string name="action_camera">Camera</string>
+    <string name="action_voice">Voice</string>
 
     <string name="fragment_living_room">LIVING ROOM</string>
     <string name="fragment_bed_room">BED ROOM</string>
