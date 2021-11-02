@@ -34,7 +34,7 @@ import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String AIO_key = "aio_TBRn08sLyKXAW4DvhSKkilgWXGI5";
+    public static String AIO_key = "";
 
     // Declare
     private BottomNavigationView main_bottom_navigation;
