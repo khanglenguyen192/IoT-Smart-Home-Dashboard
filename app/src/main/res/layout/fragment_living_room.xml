@@ -48,6 +48,20 @@
             android:textSize="14dp"
             android:textStyle="bold" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tempProgressBar_1"
+            android:layout_alignStart="@+id/tempProgressBar_1"
+            android:layout_alignEnd="@+id/tempProgressBar_1"
+            android:layout_marginStart="-4dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="-4dp"
+            android:text="Temperature"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="13dp" />
+
         <ProgressBar
             android:id="@+id/humidProgressBar_1"
             android:layout_width="80dp"
@@ -74,6 +88,21 @@
             android:gravity="center"
             android:textSize="14dp"
             android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/humidProgressBar_1"
+            android:layout_alignStart="@+id/humidProgressBar_1"
+            android:layout_alignEnd="@+id/humidProgressBar_1"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="10dp"
+            android:text="Humidity"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="13dp" />
 
         <ProgressBar
             android:id="@+id/gasProgressBar_1"
@@ -103,6 +132,20 @@
             android:gravity="center"
             android:textSize="14dp"
             android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gasProgressBar_1"
+            android:layout_alignStart="@+id/gasProgressBar_1"
+            android:layout_alignEnd="@+id/gasProgressBar_1"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="28dp"
+            android:text="Gas"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="13dp" />
 
     </RelativeLayout>
 

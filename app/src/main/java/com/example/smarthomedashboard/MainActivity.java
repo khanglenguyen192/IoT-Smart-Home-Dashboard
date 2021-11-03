@@ -34,7 +34,7 @@ import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String AIO_key = "";
+    public static String AIO_key = "aio_ZaSE71wDNDOMnaK7Ras7bckDcVW9";
 
     // Declare
     private BottomNavigationView main_bottom_navigation;
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                     int humid = jsonObject.getInt("humidity");
                     int gas = jsonObject.getInt("gas");
 
-                    handleExceedLimit(gas);
+                    handleExceedLimit(temp);
 
                     int[] tempViewList = {R.id.tempText_1, R.id.tempText_2, R.id.tempText_3};
                     int[] humidViewList = {R.id.humidText_1, R.id.humidText_2, R.id.humidText_3};
@@ -256,7 +256,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateLimit(int limit) {
-        Log.d("aaa", "updateLimit: " + limit);
         tempLimit = limit;
     }
 
@@ -276,15 +275,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleExceedLimit(int temp) throws JSONException {
-//        Log.d("aaa", "handleExceedLimit: " + temp);
         if (tempLimit != 0 && temp > tempLimit) {
             JSONObject livingRoomData = new JSONObject();
             JSONObject bedRoomData = new JSONObject();
-//            JSONObject diningRoomData = new JSONObject();
             if (temp >= 35 && temp < 39) {
                 livingRoomAirStatus.put(0, 1);
                 bedRoomAirStatus.put(0, 1);
-//                diningRoomAirStatus.put(0, 1);
             } else if (temp >= 39) {
                 livingRoomAirStatus.put(0, 1);
                 livingRoomAirStatus.put(1, 1);
@@ -324,6 +320,5 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 
 }
