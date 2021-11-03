@@ -321,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void sendDataToMain(boolean isOn)  {
+    public void sendDataToLivingRoom(boolean isOn)  {
         JSONObject livingRoomData = new JSONObject();
         try{
             for (int i = 0; i < 4; i++) {
@@ -334,6 +334,24 @@ public class MainActivity extends AppCompatActivity {
             livingRoomData.put("light", livingRoomLightStatus);
             livingRoomData.put("air", livingRoomAirStatus);
             sendDataMQTT(livingRoomData, "livingroom");
+        }catch(Exception e){
+
+        }
+    }
+
+    public void sendDataToBedRoom(boolean isOn)  {
+        JSONObject bedRoomData = new JSONObject();
+        try{
+            for (int i = 0; i < 4; i++) {
+                if (isOn){
+                    bedRoomLightStatus.put(i, 1);
+                }else{
+                    bedRoomLightStatus.put(i, 0);
+                }
+            }
+            bedRoomData.put("light", livingRoomLightStatus);
+            bedRoomData.put("air", livingRoomAirStatus);
+            sendDataMQTT(bedRoomData, "livingroom");
         }catch(Exception e){
 
         }

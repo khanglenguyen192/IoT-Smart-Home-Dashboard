@@ -134,11 +134,19 @@ public class VoiceFragment extends Fragment {
                 textView.setText(location.toString() + " " + device.toString() + " " + action.toString());
                 if (location == Location.LIVING_ROOM && device == Device.LIGHT && action == Action.ON){
                     // TODO: code here
-                    ((MainActivity) getActivity()).sendDataToMain(true);
+                    ((MainActivity) getActivity()).sendDataToLivingRoom(true);
                 }
                 else if (location == Location.LIVING_ROOM && device == Device.LIGHT && action == Action.OFF){
                     // TODO: code here
-                    ((MainActivity) getActivity()).sendDataToMain(false);
+                    ((MainActivity) getActivity()).sendDataToLivingRoom(false);
+                }
+                else if (location == Location.BEDROOM && device == Device.LIGHT && action == Action.ON){
+                    // TODO: code here
+                    ((MainActivity) getActivity()).sendDataToBedRoom(true);
+                }
+                else if (location == Location.BEDROOM && device == Device.LIGHT && action == Action.OFF){
+                    // TODO: code here
+                    ((MainActivity) getActivity()).sendDataToBedRoom(false);
                 }
             }
             else {
