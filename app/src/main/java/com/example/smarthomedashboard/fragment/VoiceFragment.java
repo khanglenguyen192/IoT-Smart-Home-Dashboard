@@ -102,10 +102,10 @@ public class VoiceFragment extends Fragment {
     }
 
     void handleSpeech(String txt) {
-        if (txt.equals("hello")) {
+        if (txt.contains("hello") || txt.contains("hi ") || txt.contains(" hi ")) {
             textView.setText("Hello, how can i help you");
             speak("Hello, how can i help you");
-        } else if (txt.equals("what is your name")) {
+        } else if (txt.contains("what") || txt.contains("your name")) {
             textView.setText("My name is Smart Home");
             speak("My name is Smart Home");
         } else if (txt.equals("how are you")) {
@@ -117,7 +117,7 @@ public class VoiceFragment extends Fragment {
         } else if (txt.equals("tell me a joke")) {
             textView.setText("What did one snowman say to the other? Do you smell carrots?");
             speak("What did one snowman say to the other? Do you smell carrots?");
-        } else if (txt.equals("how is the weather")) {
+        } else if (txt.contains("weather") && (txt.contains("what") || txt.contains("how"))) {
             textView.setText("It is sunny");
             speak("It is sunny");
         } else {
@@ -129,6 +129,7 @@ public class VoiceFragment extends Fragment {
 
             if (location != Location.NO_ROOM && device != Device.NO_DEVICE && action != Action.NO_ACTION) {
                 textView.setText(location.toString() + " " + device.toString() + " " + action.toString());
+
             } else {
                 textView.setText("Sorry I don't understand");
                 speak("Sorry I don't understand");
