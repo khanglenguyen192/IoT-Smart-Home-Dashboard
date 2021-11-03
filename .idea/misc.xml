@@ -15,13 +15,9 @@
         <entry key="..\:/IoT-Smart-Home-Dashboard-main/IoT-Smart-Home-Dashboard-main/app/src/main/res/layout/fragment_living_room_light.xml" value="0.4" />
         <entry key="..\:/IoT-Smart-Home-Dashboard-main/IoT-Smart-Home-Dashboard-main/app/src/main/res/layout/fragment_setting.xml" value="0.264" />
         <entry key="..\:/IoT-Smart-Home-Dashboard-main/IoT-Smart-Home-Dashboard-main/app/src/main/res/menu/menu_bottom_nav.xml" value="0.13020833333333334" />
-        <entry key="..\:/android studio/IoTFinal/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
-        <entry key="..\:/android studio/IoTFinal/app/src/main/res/layout/content.xml" value="0.36666666666666664" />
-        <entry key="..\:/android studio/IoTFinal/app/src/main/res/layout/fragment_bed_room.xml" value="0.36666666666666664" />
-        <entry key="..\:/android studio/IoTFinal/app/src/main/res/layout/fragment_chart.xml" value="0.36666666666666664" />
-        <entry key="..\:/android studio/IoTFinal/app/src/main/res/layout/fragment_dining_room.xml" value="0.36666666666666664" />
-        <entry key="..\:/android studio/IoTFinal/app/src/main/res/layout/fragment_living_room.xml" value="0.36666666666666664" />
-        <entry key="..\:/android studio/IoTFinal/app/src/main/res/layout/fragment_setting.xml" value="0.36666666666666664" />
+        <entry key="..\:/New folder (5)/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_bed_room.xml" value="0.536" />
+        <entry key="..\:/New folder (5)/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_dining_room.xml" value="0.4" />
+        <entry key="..\:/New folder (5)/IoT-Smart-Home-Dashboard/app/src/main/res/layout/fragment_living_room.xml" value="0.4875124875124875" />
         <entry key="..\:/android studio/SmartHomeDashboard/app/src/main/res/drawable/ellipse.xml" value="0.3828125" />
         <entry key="..\:/android studio/SmartHomeDashboard/app/src/main/res/drawable/ellipse_13.xml" value="0.3828125" />
         <entry key="..\:/android studio/SmartHomeDashboard/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
@@ -68,7 +64,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

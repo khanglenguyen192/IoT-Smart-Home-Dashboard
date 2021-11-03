@@ -157,12 +157,13 @@ public class ChartFragment extends Fragment {
                 String time = data.getJSONObject(i).getString("created_at");
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
                 Date date = dateFormat.parse(time);
+                int localTime = date.getHours() + 7;
                 int temp = parsedData.getInt("temp");
                 int humid = parsedData.getInt("humidity");
 
-                tempHashMap.put(date.getHours(), tempHashMap.get(date.getHours()) + (float) temp);
-                humidHashMap.put(date.getHours(), humidHashMap.get(date.getHours()) + (float) humid);
-                numOfRecord.put(date.getHours(), numOfRecord.get(date.getHours()) + 1);
+                tempHashMap.put(localTime, tempHashMap.get(localTime) + (float) temp);
+                humidHashMap.put(localTime, humidHashMap.get(localTime) + (float) humid);
+                numOfRecord.put(localTime, numOfRecord.get(localTime) + 1);
             }
 
             for (int i = 0; i < HOUR_OF_DAY; i++) {
@@ -220,19 +221,6 @@ public class ChartFragment extends Fragment {
         lineChart.setDoubleTapToZoomEnabled(false);
         MyMarkerView marker = new MyMarkerView(getActivity(), R.layout.content);
         lineChart.setMarker(marker);
-
-        //        XAxis xAxis = tempChart.getXAxis();
-//        xAxis.setValueFormatter(new IndexAxisValueFormatter() {
-//            @Override
-//            public String getFormattedValue(float value) {
-//
-//                String timeElapsed = DateUtils.formatElapsedTime();
-//                String timeElapsed = convertSecondToHour((long) value);
-//                Log.d("timeElapsed", Float.toString(value));
-//                return timeElapsed;
-//                return "00:00";
-//            }
-//        });
     }
 
     public static String getNextDate(String curDate) throws ParseException {
