@@ -34,7 +34,7 @@ import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String AIO_key = "aio_eygT98YH50PlEd8jDewEp8bIVFxJ";
+    public static String AIO_key = "";
 
     // Declare
     private BottomNavigationView main_bottom_navigation;
@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
         if (tempLimit != 0 && temp > tempLimit) {
             JSONObject livingRoomData = new JSONObject();
             JSONObject bedRoomData = new JSONObject();
-            if (temp >= 35 && temp < 39) {
+            if (temp < 39) {
                 livingRoomAirStatus.put(0, 1);
                 bedRoomAirStatus.put(0, 1);
             } else if (temp >= 39) {
