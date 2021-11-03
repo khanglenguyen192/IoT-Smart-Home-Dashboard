@@ -15,7 +15,10 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.smarthomedashboard.MainActivity;
 import com.example.smarthomedashboard.R;
+
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
@@ -129,8 +132,16 @@ public class VoiceFragment extends Fragment {
 
             if (location != Location.NO_ROOM && device != Device.NO_DEVICE && action != Action.NO_ACTION) {
                 textView.setText(location.toString() + " " + device.toString() + " " + action.toString());
-
-            } else {
+                if (location == Location.LIVING_ROOM && device == Device.LIGHT && action == Action.ON){
+                    // TODO: code here
+                    ((MainActivity) getActivity()).sendDataToMain(true);
+                }
+                else if (location == Location.LIVING_ROOM && device == Device.LIGHT && action == Action.OFF){
+                    // TODO: code here
+                    ((MainActivity) getActivity()).sendDataToMain(false);
+                }
+            }
+            else {
                 textView.setText("Sorry I don't understand");
                 speak("Sorry I don't understand");
             }
@@ -169,4 +180,16 @@ public class VoiceFragment extends Fragment {
 
         return Arrays.asList(location, device, action);
     }
+
+
+//    public interface ISendDataLister{
+//        void sendData(String data);
+//    }
+//
+//    public void sendDataToFragment(String data){
+//
+//    }
+
+
+
 }

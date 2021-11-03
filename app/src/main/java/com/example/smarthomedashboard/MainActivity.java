@@ -321,4 +321,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void sendDataToMain(boolean isOn)  {
+        JSONObject livingRoomData = new JSONObject();
+        try{
+            for (int i = 0; i < 4; i++) {
+                if (isOn){
+                    livingRoomLightStatus.put(i, 1);
+                }else{
+                    livingRoomLightStatus.put(i, 0);
+                }
+            }
+            livingRoomData.put("light", livingRoomLightStatus);
+            livingRoomData.put("air", livingRoomAirStatus);
+            sendDataMQTT(livingRoomData, "livingroom");
+        }catch(Exception e){
+
+        }
+    }
+
 }
