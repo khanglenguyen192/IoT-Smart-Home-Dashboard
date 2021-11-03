@@ -349,9 +349,9 @@ public class MainActivity extends AppCompatActivity {
                     bedRoomLightStatus.put(i, 0);
                 }
             }
-            bedRoomData.put("light", livingRoomLightStatus);
-            bedRoomData.put("air", livingRoomAirStatus);
-            sendDataMQTT(bedRoomData, "livingroom");
+            bedRoomData.put("light", bedRoomLightStatus);
+            bedRoomData.put("air", bedRoomAirStatus);
+            sendDataMQTT(bedRoomData, "bedroom");
         }catch(Exception e){
 
         }
