@@ -42,5 +42,31 @@ public class HomeFragment extends Fragment {
     private void setUpHomeViewPager() {
         HomeViewPagerAdapter homeViewPagerAdapter = new HomeViewPagerAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         homeViewPager.setAdapter(homeViewPagerAdapter);
+        homeViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        homeViewPager.setOffscreenPageLimit(0);
+                        break;
+                    case 1:
+                        homeViewPager.setOffscreenPageLimit(1);
+                        break;
+                    case 2:
+                        homeViewPager.setOffscreenPageLimit(2);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 }
